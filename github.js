@@ -283,6 +283,17 @@
         });
       };
 
+      // post a new tre object specifying a base tree
+      // @param String baseTree the sha of the base tree
+      this.postTreeFromBase = function(tree, baseTree, cb){
+        var postData = { "tree": tree };
+        if(baseTree && typeof(baseTree) == 'string' && baseTree.length > 0) postData['base_tree'] = baseTree;
+        _request("POST", repoPath + "/git/trees", postData, function(err, res) {
+          if (err) return cb(err);
+          cb(null, res.sha);
+        });
+      }
+
       // Create a new commit object with the current commit SHA as the parent
       // and the new tree SHA, getting a commit SHA back
       // -------
