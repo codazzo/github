@@ -306,6 +306,13 @@
         });
       };
 
+      // Get a repo's commits
+      this.getCommits = function(cb) {
+        _request("GET", repoPath + "/commits", null, function(err, res) {
+          cb(err, res);
+        });
+      };
+
       // Update the reference of your head to point to the new commit SHA
       // -------
 
